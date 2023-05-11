@@ -27,7 +27,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/core/modules/websdk/index.js",
+              "node_modules/@digitalpersona/devices/dist/es6.bundles/index.umd.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,7 +92,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/app/core/modules/websdk/index.js",
+              "node_modules/@digitalpersona/devices/dist/es6.bundles/index.umd.min.js"
+            ]
           }
         }
       }
