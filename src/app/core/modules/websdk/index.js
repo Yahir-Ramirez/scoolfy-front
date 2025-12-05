@@ -6118,9 +6118,10 @@
         core.log("Configurator: ensureLoaded");
 
         if (!!this.url && !!this.srp) return callback(null);
-
+        //AQUI VA LA URI DEL DISPOSITIVO FINGERPRINT DIGITAL PERSONA 4500
+        //https://127.0.0.1:52181/get_connection http://localhost:8080/
         var self = this,
-            uri = "https://127.0.0.1:52181/get_connection";
+            uri = 'https://127.0.0.1:52181/get_connection';
 
         utils.ajax('get', uri)
             .then(function (response) {

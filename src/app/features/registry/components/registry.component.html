@@ -1,0 +1,329 @@
+<mat-horizontal-stepper linear #stepper class="stepper">
+  <!-- Paso 1: Datos básicos -->
+  <mat-step [stepControl]="userBasicDataForm" label="Datos del estudiante">
+    <div class="form-wrapper">
+      <form [formGroup]="userBasicDataForm" class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Primer Nombre</mat-label>
+          <input matInput formControlName="firstName" required />
+          <button
+            mat-icon-button
+            matSuffix
+            [matTooltip]="getFieldTooltip('firstName')"
+            [color]="getFieldColor('firstName')"
+            matTooltipClass="multiline-tooltip"
+            tabindex="-1"
+          >
+            <mat-icon>
+              {{
+                userBasicDataForm.get("firstName")?.invalid &&
+                userBasicDataForm.get("firstName")?.touched
+                  ? "error_outline"
+                  : userBasicDataForm.get("firstName")?.valid
+                  ? "check_circle"
+                  : "info"
+              }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput formControlName="secondName" />
+          <button
+            mat-icon-button
+            matSuffix
+            [matTooltip]="getFieldTooltip('secondName')"
+            matTooltipClass="multiline-tooltip"
+            [color]="getFieldColor('secondName')"
+            tabindex="-1"
+          >
+            <mat-icon>
+              {{
+                userBasicDataForm.get("secondName")?.invalid &&
+                userBasicDataForm.get("secondName")?.touched
+                  ? "error_outline"
+                  : userBasicDataForm.get("secondName")?.valid
+                  ? "check_circle"
+                  : "info"
+              }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Primer Apellido</mat-label>
+          <input matInput formControlName="firstLastName" required />
+          <button
+            mat-icon-button
+            matSuffix
+            [matTooltip]="getFieldTooltip('firstLastName')"
+            matTooltipClass="multiline-tooltip"
+            [color]="getFieldColor('firstLastName')"
+            tabindex="-1"
+          >
+            <mat-icon>
+              {{
+                userBasicDataForm.get("firstLastName")?.invalid &&
+                userBasicDataForm.get("firstLastName")?.touched
+                  ? "error_outline"
+                  : userBasicDataForm.get("firstLastName")?.valid
+                  ? "check_circle"
+                  : "info"
+              }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Segundo Apellido</mat-label>
+          <input matInput formControlName="secondLastName" />
+          <button
+            mat-icon-button
+            matSuffix
+            [matTooltip]="getFieldTooltip('secondLastName')"
+            matTooltipClass="multiline-tooltip"
+            [color]="getFieldColor('secondLastName')"
+            tabindex="-1"
+          >
+            <mat-icon>
+              {{
+                userBasicDataForm.get("secondLastName")?.invalid &&
+                userBasicDataForm.get("secondLastName")?.touched
+                  ? "error_outline"
+                  : userBasicDataForm.get("secondLastName")?.valid
+                  ? "check_circle"
+                  : "info"
+              }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required />
+          <button
+            mat-icon-button
+            matSuffix
+            [matTooltip]="getFieldTooltip('email')"
+            matTooltipClass="multiline-tooltip"
+            [color]="getFieldColor('email')"
+            tabindex="-1"
+          >
+            <mat-icon>
+              {{
+                userBasicDataForm.get("email")?.invalid &&
+                userBasicDataForm.get("email")?.touched
+                  ? "error_outline"
+                  : userBasicDataForm.get("email")?.valid
+                  ? "check_circle"
+                  : "info"
+              }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Identificación</mat-label>
+          <input matInput formControlName="idStudent" required />
+          <button
+            mat-icon-button
+            matSuffix
+            [matTooltip]="getFieldTooltip('idStudent')"
+            matTooltipClass="multiline-tooltip"
+            [color]="getFieldColor('idStudent')"
+            tabindex="-1"
+          >
+            <mat-icon>
+              {{
+                userBasicDataForm.get("idStudent")?.invalid &&
+                userBasicDataForm.get("idStudent")?.touched
+                  ? "error_outline"
+                  : userBasicDataForm.get("idStudent")?.valid
+                  ? "check_circle"
+                  : "info"
+              }}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Grado</mat-label>
+          <mat-select formControlName="grade" required>
+            <mat-option *ngFor="let grade of grades" [value]="grade">
+              {{ grade }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Grupo</mat-label>
+          <mat-select formControlName="group" required>
+            <mat-option *ngFor="let group of groups" [value]="group">
+              {{ group }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" matStepperNext>
+            Continuar
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-step>
+
+  <!-- Paso 2: Huellas -->
+  <mat-step [stepControl]="userFingerprintsForm" label="Huellas dactilares">
+    <div class="fingerprint-step-wrapper">
+      <form [formGroup]="userFingerprintsForm" class="fingerprint-form">
+        <div formArrayName="fingerprints" class="fingerprint-list">
+          <div
+            *ngFor="
+              let fingerprintGroup of fingerprints.controls;
+              let i = index
+            "
+            [formGroupName]="i"
+            class="fingerprint-box"
+          >
+            <p>
+              <strong>Huella {{ i + 1 }}</strong>
+            </p>
+
+            <ng-container [formGroup]="userFingerprintsForm">
+              <ng-container
+                *ngIf="
+                  fingerprintGroup.getRawValue().loading;
+                  else fingerprintButton
+                "
+              >
+                <p class="loading-text">Capturando...</p>
+              </ng-container>
+
+              <ng-template #fingerprintButton>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="button"
+                  (click)="captureFingerprint(i)"
+                  [disabled]="fingerprintGroup.getRawValue().captured"
+                >
+                  {{
+                    fingerprintGroup.getRawValue().captured
+                      ? "Huella capturada ✅"
+                      : "Capturar huella"
+                  }}
+                </button>
+              </ng-template>
+            </ng-container>
+
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              (click)="removeFingerprint(i)"
+              aria-label="Eliminar huella"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button
+            mat-stroked-button
+            color="primary"
+            type="button"
+            (click)="addFingerprint()"
+          >
+            Agregar otra huella
+          </button>
+
+          <div class="footer-nav">
+            <button mat-button matStepperPrevious>Volver</button>
+            <button mat-raised-button color="primary" matStepperNext>
+              Siguiente
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-step>
+
+  <!-- Paso 3: Confirmación -->
+  <mat-step label="Confirmar">
+    <div class="confirm-container">
+      <h2 class="confirm-title">¿Confirmas el registro?</h2>
+
+      <!-- Tarjeta datos del estudiante -->
+      <mat-card class="confirm-card">
+        <mat-card-title>Datos del estudiante</mat-card-title>
+        <mat-card-content>
+          <table class="confirm-table">
+            <tr>
+              <td>Nombre:</td>
+              <td>
+                {{ userBasicDataForm.value.firstName }}
+                {{ userBasicDataForm.value.secondName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Apellidos:</td>
+              <td>
+                {{ userBasicDataForm.value.firstLastName }}
+                {{ userBasicDataForm.value.secondLastName }}
+              </td>
+            </tr>
+            <tr>
+              <td>ID Estudiante:</td>
+              <td>{{ userBasicDataForm.value.idStudent }}</td>
+            </tr>
+            <tr>
+              <td>Grado:</td>
+              <td>{{ userBasicDataForm.value.grade }}</td>
+            </tr>
+            <tr>
+              <td>Grupo:</td>
+              <td>{{ userBasicDataForm.value.group }}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>{{ userBasicDataForm.value.email }}</td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Tarjeta huellas -->
+      <mat-card class="confirm-card">
+        <mat-card-title>Huellas capturadas</mat-card-title>
+        <mat-card-content>
+          <div
+            *ngFor="let f of fingerprints.value; let i = index"
+            class="fingerprint-item"
+          >
+            <mat-icon class="fp-icon" color="primary">
+              {{ f.captured ? "fingerprint" : "pending" }}
+            </mat-icon>
+            <div class="fp-info">
+              <div>
+                <strong>Huella {{ i + 1 }}</strong>
+              </div>
+              <div *ngIf="f.captured">Código: {{ f.data }}</div>
+              <div *ngIf="!f.captured" class="fp-pending">Sin capturar</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Botones -->
+      <div class="confirm-buttons">
+        <button mat-button color="primary" (click)="goBack()">Volver</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Registrar
+        </button>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

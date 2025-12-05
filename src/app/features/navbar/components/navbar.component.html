@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <img src="../../../../assets/Logo.jpg" alt="Scoolfy Logo" />
+  <span class="spacer"></span>
+  <div class="home-flex-container">
+    <div class="home-button-container">
+      <button
+        mat-raised-button
+        [routerLink]="['']"
+        *ngIf="this.showBackButton"
+        aria-label="Boton para regresar al menú principal"
+        class="home-button"
+      >
+        <mat-icon class="home-icon">home</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

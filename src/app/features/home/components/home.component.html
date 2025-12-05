@@ -1,0 +1,84 @@
+<div class="home-container">
+  <h1>Bienvenido al Sistema de Gestión de Asistencia</h1>
+  <p style="font-weight: 500">
+    Gestiona la información de los estudiantes, su acceso y registros de manera
+    eficiente.
+  </p>
+
+  <div class="cards-container">
+    <!-- Tarjeta de Estudiantes -->
+    <mat-card class="home-card">
+      <mat-card-header>
+        <div></div>
+        <mat-card-title class="home-card-tittle"
+          >Consultar Estudiantes</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <p>Consulta la información de los estudiantes registrados.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          class="mat-mdc-card-home-actions-button"
+          [routerLink]="['/students']"
+        >
+          Estudiantes
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Tarjeta de Acceso -->
+    <mat-card class="home-card home-card-darker">
+      <mat-card-header>
+        <mat-card-title class="home-card-tittle"
+          >Control de Acceso</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Gestiona el acceso de los estudiantes mediante reconocimiento de
+          huella digital.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          class="mat-mdc-card-home-actions-button mat-mdc-card-home-actions-button-darker"
+          [routerLink]="['/access']"
+        >
+          Acceso
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Tarjeta de Registro -->
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title class="home-card-tittle"
+          >Registrar Estudiantes</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <p>Registra nuevos estudiantes en el sistema.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          class="mat-mdc-card-home-actions-button"
+          [routerLink]="['/registry']"
+        >
+          Registro
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="stats-container">
+    <h2>Estadísticas</h2>
+    <p>Estudiantes registrados: 150</p>
+    <p>Accesos hoy: 25</p>
+    <p>Nuevos registros esta semana: 10</p>
+  </div>
+</div>

@@ -16,18 +16,11 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es6",
-    "module": "es6",
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],    
+    "target": "es2022",
+    "module": "es2020",
+    "lib": ["ES2022", "dom"],
     //agrego los modulos
-    "typeRoots": [
-      "node_modules/@types",
-      "src/app/core/modules"
-    ],
+    "typeRoots": ["node_modules/@types", "src/app/core/modules"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

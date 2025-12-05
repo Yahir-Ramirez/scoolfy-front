@@ -17,18 +17,18 @@ export class FingerPrintService {
   samples: any[] = [];
   huella: any;
   reader: FingerprintReader = new FingerprintReader();
-  sampleObservable= new Subject<any>();
-  samplesObservable= new Subject<any>();
+  sampleObservable = new Subject<any>();
+  samplesObservable = new Subject<any>();
 
 
-  constructor() {}
+  constructor() { }
 
   private onDeviceConnected = (event: any) => {
     console.log(event);
   };
-  private onDeviceDisconnected = (event: any) => {};
-  private onReaderError = (event: any) => {};
-  private onAcquisitionStarted = (event: any) => {};
+  private onDeviceDisconnected = (event: any) => { };
+  private onReaderError = (event: any) => { };
+  private onAcquisitionStarted = (event: any) => { };
   private onSampleAcquired = (event: any) => {
     Swal.fire({
       title: 'completado',
@@ -54,13 +54,13 @@ export class FingerPrintService {
       this.samples = [];
       this.destroyReader();
     }
-    else{
-    await Swal.fire({
-      title: 'Leyendo huella',
-      text: 'Por favor coloque su dedo en el lector',
-      icon: 'info',
-    });
-  }
+    else {
+      await Swal.fire({
+        title: 'Leyendo huella',
+        text: 'Por favor coloque su dedo en el lector',
+        icon: 'info',
+      });
+    }
   }
 
   private async initReaderObservable(cantidad: number = 1) {
@@ -68,7 +68,7 @@ export class FingerPrintService {
     this.reader.on('DeviceDisconnected', this.onDeviceDisconnected);
     this.reader.on('ErrorOccurred', this.onReaderError);
     cantidad === 1 ? this.reader.on('SamplesAcquired', this.onSampleAcquired)
-                   : this.reader.on('SamplesAcquired', this.onSampleAcquiredMultiple) ;       
+      : this.reader.on('SamplesAcquired', this.onSampleAcquiredMultiple);
     this.reader.on('AcquisitionStarted', this.onAcquisitionStarted);
     await this.reader.startAcquisition(SampleFormat.PngImage).then(() => {
       Swal.fire({
@@ -90,21 +90,21 @@ export class FingerPrintService {
     this.reader = this.reader.off();
   }
 
-  leerHuella(cantidad=1) {
+  leerHuella(cantidad = 1) {
     console.log('hola mundo');
     this.initReaderObservable(cantidad);
     return this.sampleObservable.asObservable();
-   }
+  }
 
-   leerHuellas() {
+  leerHuellas() {
     this.initReaderObservable(3);
 
     return this.samplesObservable.asObservable();
-   }
+  }
 
-  leerHuellaDestroy(){
+  leerHuellaDestroy() {
     this.destroyReader();
   }
 
-  
+
 }
